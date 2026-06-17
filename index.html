@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ICP Segment Comparison — SpotOn</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #f9fafb; min-height: 100vh; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    const { useState } = React;
+
+    const A = ({ href, children }) => (
+      <a href={href} target="_blank" rel="noopener noreferrer"
+        style={{ color: "inherit", textDecoration: "underline", opacity: 0.7 }}>
+        {children}
+      </a>
+    );
+
+    const data = {
+      rows: [
+        {
+          label: "Market Size (US)",
+          icon: "📊",
+          fsr: {
+            headline: "$260B revenue, 152K locations",
+            points: [
+              <><A href="https://www.ibisworld.com/united-states/number-of-businesses/single-location-full-service-restaurants/1678/">152,430 single-location FSRs (IBISWorld, 2025)</A></>,
+              <><A href="https://www.ibisworld.com/united-states/market-size/single-location-full-service-restaurants/1678/">$260.1B total industry revenue in 2025 (IBISWorld)</A></>,
+              <><A href="https://www.ibisworld.com/united-states/market-size/single-location-full-service-restaurants/1678/">Growing at ~1.7% YoY (IBISWorld)</A></>,
+            ],
+          },
+          fastcasual: {
+            headline: "$48.5B US market, fastest growth",
+            points: [
+              <><A href="https://www.expertmarketresearch.com/reports/united-states-fast-casual-restaurant-market">$48.5B US market in 2025 (Expert Market Research)</A></>,
+              <><A href="https://www.expertmarketresearch.com/reports/united-states-fast-casual-restaurant-market">Growing to ~$90B by 2035 (Expert Market Research)</A></>,
+              <><A href="https://www.expertmarketresearch.com/reports/united-states-fast-casual-restaurant-market">6.4% CAGR — fastest-growing dining segment (Expert Market Research)</A></>,
+              <><A href="https://straitsresearch.com/report/fast-casual-restaurant-market">14.2% of all global foodservice revenue, up from 9.8% in 2019 (Straits Research)</A></>,
+            ],
+          },
+          qsr: {
+            headline: "$447B US market, ~250K+ locations",
+            points: [
+              <><A href="https://www.mordorintelligence.com/industry-reports/united-states-quick-service-restaurants-market">$447.2B US market in 2025 (Mordor Intelligence)</A></>,
+              <><A href="https://www.statista.com/statistics/217561/number-of-quick-service-restaurant-franchise-establishments-in-the-us/">~195K+ franchise locations (Statista, 2023); total ~250K+ est.</A></>,
+              <><A href="https://www.mordorintelligence.com/industry-reports/united-states-quick-service-restaurants-market">~3.8% CAGR — mature, slower growth (Mordor Intelligence)</A></>,
+              <><A href="https://www.mordorintelligence.com/industry-reports/united-states-quick-service-restaurants-market">~60% of all US restaurant sales (Mordor Intelligence)</A></>,
+            ],
+          },
+        },
+        {
+          label: "Scale & Growth Stage",
+          icon: "🏗️",
+          fsr: {
+            headline: "Independent → regional group",
+            points: [
+              <>
+                <strong>Independent (1–2 locations)</strong> — Owner in the building daily; buys tech themselves, no IT person
+                <br/><span style={{fontSize:11.5,color:"#6b7280"}}>e.g. </span>
+                <A href="https://chinalivesf.com/">China Live (SF)</A>{" · "}
+                <A href="https://www.burlesbar.com/">Burle's Bar (Atlanta)</A>{" · "}
+                <A href="https://sidecarbarsd.com/">Sidecar Bar (San Diego)</A>{" · "}
+                <A href="https://www.waddellslonghorn.com/">Waddell's Longhorn (Buckeye AZ)</A>
+              </>,
+              <>
+                <strong>Emerging multi-unit (3–15 locations)</strong> — Hiring first GMs, starting to systematize; owner still approves tech buys
+                <br/><span style={{fontSize:11.5,color:"#6b7280"}}>e.g. </span>
+                <A href="https://www.boka.com/">Boka Restaurant Group (Chicago)</A>{" · "}
+                <A href="https://rpmrestaurants.com/">RPM Restaurants (Chicago)</A>
+              </>,
+              <>
+                <strong>Regional / professional ops (15–75 locations)</strong> — Hired COO or VP Ops; formal procurement; tech evaluated centrally
+                <br/><span style={{fontSize:11.5,color:"#6b7280"}}>e.g. </span>
+                <A href="https://www.leye.com/">Lettuce Entertain You (Chicago, 50+ concepts)</A>
+              </>,
+              <>
+                <strong>National chain / enterprise (75+ locations)</strong> — Corp-level tech mandates; typically outside SpotOn ICP
+                <br/><span style={{fontSize:11.5,color:"#6b7280"}}>e.g. </span>
+                <A href="https://www.darden.com/">Darden (Olive Garden, LongHorn)</A>{" · "}
+                <A href="https://www.bloominbrands.com/">Bloomin' Brands (Outback)</A>
+              </>,
+            ],
+          },
+          fastcasual: {
+            headline: "Independent → national brand",
+            points: [
+              <>
+                <strong>Independent (1–2 locations)</strong> — Chef-driven concept proving the model; owner-operated, personal buying decisions
+                <br/><span style={{fontSize:11.5,color:"#6b7280"}}>e.g. </span>
+                <A href="https://www.google.com/maps/search/?api=1&query=Honey+Butter+Fried+Chicken+Chicago">Honey Butter Fried Chicken (Chicago)</A>{" · "}
+                <A href="https://www.google.com/maps/search/?api=1&query=Nopa+Kitchen+Bar+San+Francisco">NoPa Kitchen + Bar (SF)</A>
+              </>,
+              <>
+                <strong>Emerging chain (3–20 locations)</strong> — Proving unit economics, early investors, needs replicable tech stack
+                <br/><span style={{fontSize:11.5,color:"#6b7280"}}>e.g. </span>
+                <A href="https://www.theproteinbar.com/">Protein Bar & Kitchen (Chicago, ~15 locations)</A>{" · "}
+                <A href="https://www.souvla.com/">Souvla (SF, 5 locations)</A>
+              </>,
+              <>
+                <strong>Regional / scaling (20–100 locations)</strong> — VC or PE-backed; dedicated ops + tech team; multi-state expansion
+                <br/><span style={{fontSize:11.5,color:"#6b7280"}}>e.g. </span>
+                <A href="https://www.portillos.com/">Portillo's (Chicago-born, 70+ locations)</A>{" · "}
+                <A href="https://www.ilikeikesplace.com/">Ike's Love & Sandwiches (SF-born, ~50 locations)</A>
+              </>,
+              <>
+                <strong>National enterprise (100+ locations)</strong> — Dedicated tech org; formal RFP process; SpotOn competes against enterprise POS
+                <br/><span style={{fontSize:11.5,color:"#6b7280"}}>e.g. </span>
+                <A href="https://www.chipotle.com/">Chipotle</A>{" · "}
+                <A href="https://cava.com/">CAVA</A>{" · "}
+                <A href="https://www.sweetgreen.com/">Sweetgreen</A>
+              </>,
+            ],
+          },
+          qsr: {
+            headline: "Independent → national franchisor",
+            points: [
+              <>
+                <strong>Independent (1–3 locations)</strong> — Local owner-operator, not a franchise; buys own tech, tight margins
+                <br/><span style={{fontSize:11.5,color:"#6b7280"}}>e.g. </span>
+                <A href="https://brunswickburgerhouse.com/">Brunswick Burger House (Chicago)</A>{" · "}
+                <A href="https://www.google.com/maps/search/?api=1&query=La+Taqueria+San+Francisco">La Taqueria (SF)</A>
+              </>,
+              <>
+                <strong>Small franchisee (1–10 franchise units)</strong> — Running a national brand's locations; tech is largely dictated by the franchisor, not the operator
+                <br/><span style={{fontSize:11.5,color:"#6b7280"}}>e.g. </span>
+                <A href="https://www.google.com/maps/search/?api=1&query=Harold%27s+Chicken+Shack+Chicago">Harold's Chicken Shack (Chicago franchise system)</A>{" · "}
+                <A href="https://www.google.com/maps/search/?api=1&query=Subway+Chicago">Local Subway franchisee</A>
+              </>,
+              <>
+                <strong>Mid-size franchisee (10–50 units)</strong> — Starting to act like an operator; may push back on franchisor tech; SpotOn's most viable QSR ICP
+                <br/><span style={{fontSize:11.5,color:"#6b7280"}}>e.g. </span>
+                <A href="https://www.google.com/maps/search/?api=1&query=Portillo%27s+Chicago">Portillo's (Chicago-area franchisee group)</A>{" · "}
+                <A href="https://www.in-n-out.com/">In-N-Out (CA regional, family-owned)</A>
+              </>,
+              <>
+                <strong>Franchisor / national enterprise (50+ locations)</strong> — Tech baked into franchise agreement or mandated at corp level; near-impossible to displace
+                <br/><span style={{fontSize:11.5,color:"#6b7280"}}>e.g. </span>
+                <A href="https://corporate.mcdonalds.com/">McDonald's (HQ: Chicagoland)</A>{" · "}
+                <A href="https://www.chick-fil-a.com/">Chick-fil-A</A>{" · "}
+                <A href="https://www.tacobell.com/">Taco Bell</A>
+              </>,
+            ],
+          },
+        },
+        {
+          label: "Operator Breakdown",
+          icon: "🏢",
+          fsr: {
+            headline: "~100% independent owners",
+            points: [
+              <><A href="https://www.ibisworld.com/united-states/number-of-businesses/single-location-full-service-restaurants/1678/">152K locations are by definition single-unit independents (IBISWorld)</A></>,
+              "Owner makes all technology decisions directly",
+              "Win one restaurant, grow by referral — fragmented but high-intent buyers",
+              "Multi-unit FSR operators (Darden, etc.) exist but are not the ICP",
+            ],
+          },
+          fastcasual: {
+            headline: "Mix: ~20% independent, ~80% chain",
+            points: [
+              <><A href="https://www.businessresearchinsights.com/market-reports/casual-dining-market-117489">~48% multinational chains, ~32% regional operators, ~20% independent (Business Research Insights)</A></>,
+              "1–10 unit range is the emerging chain sweet spot (Sweetgreen, CAVA early-stage)",
+              "Operators in this range are tech-savvy and make their own buying decisions",
+              "10+ unit chains move toward centralized procurement",
+            ],
+          },
+          qsr: {
+            headline: "~80% franchise, ~20% independent",
+            points: [
+              <><A href="https://www.statista.com/statistics/217561/number-of-quick-service-restaurant-franchise-establishments-in-the-us/">~195K of ~250K locations are franchise-operated (Statista/Rezku)</A></>,
+              <><A href="https://rezku.com/blog/qsr-industry/">~50K est. independent QSRs — weak economics at single-unit (Rezku)</A></>,
+              <><A href="https://www.jackintheboxfranchising.com/qsr-industry">Franchisees with 1–10 units are common, but tech decisions are driven by the franchisor (Jack in the Box Franchising)</A></>,
+              "Viable ICP: franchisee with 50+ units, or regional chain — below that, spend rarely justifies enterprise tech",
+            ],
+          },
+        },
+        {
+          label: "Average Check Size",
+          icon: "💰",
+          fsr: {
+            headline: "$18–$35+ per person",
+            points: [
+              <><A href="https://nationalrestaurantauthority.com/restaurant-industry-segments">$18–$35 casual dining; $35–$80+ fine dining (National Restaurant Authority)</A></>,
+              <><A href="https://nationalrestaurantauthority.com/restaurant-industry-segments">Tip income adds ~18–22% to transaction value (National Restaurant Authority)</A></>,
+              "Occasion-driven: anniversaries, business dinners, celebrations",
+            ],
+          },
+          fastcasual: {
+            headline: "$11–$16 per person",
+            points: [
+              <><A href="https://dojobusiness.com/blogs/news/restaurant-average-check">$11–$16 average check — 15–25% premium over QSR (BusinessDojo)</A></>,
+              "No tipping expected but common on digital orders",
+              "Customizable menus drive higher modifiers",
+              <><A href="https://www.hc-resource.com/posts/fast-casual-restaurants-are-leading-u.s.-growth-in-2025-and-here%27s-why">Loyalty programs show strong repeat purchase lift (HC-Resource)</A></>,
+            ],
+          },
+          qsr: {
+            headline: "$8–$12 per person",
+            points: [
+              <><A href="https://dojobusiness.com/blogs/news/restaurant-average-check">$8–$12 average check — volume is the margin driver (BusinessDojo)</A></>,
+              <><A href="https://rezku.com/blog/qsr-industry/">Drive-thru adds 40–70% to revenue potential per location (Rezku)</A></>,
+              "High transaction volume (100–500+ tickets/day per location)",
+              <><A href="https://rezku.com/blog/qsr-industry/">Digital kiosks shown to increase check 15–20% (Rezku)</A></>,
+            ],
+          },
+        },
+        {
+          label: "Profit Margins",
+          icon: "📈",
+          fsr: {
+            headline: "3–5% net margin",
+            points: [
+              <><A href="https://whipplewood.com/insights/financial-benchmarks-for-restaurants/">3–5% net margin; well-run casual dining at 5–7% (Whipplewood 2026)</A></>,
+              <><A href="https://whipplewood.com/insights/financial-benchmarks-for-restaurants/">Thinnest margins of the three segments (Whipplewood 2026)</A></>,
+              <><A href="https://www.touchbistro.com/blog/state-of-restaurants-report/">Labor cost median: 36.5% of sales; profitable ops: 34.2% (TouchBistro 2026)</A></>,
+              <><A href="https://vantainsights.com/insights/restaurant-food-cost-percentage">Food cost: 28–35% of sales (VantaInsights)</A></>,
+              "High sensitivity to labor laws, tariffs, and inflation",
+            ],
+          },
+          fastcasual: {
+            headline: "6–10% net margin",
+            points: [
+              <><A href="https://www.restroworks.com/blog/restaurant-profitability-statistics/">6–10% net margin — better than FSR (Restroworks)</A></>,
+              <><A href="https://www.restroworks.com/blog/restaurant-profitability-statistics/">28–32% food costs (Restroworks)</A></>,
+              <><A href="https://www.restroworks.com/blog/restaurant-profitability-statistics/">Lower labor than FSR: 20–35 staff vs. 35–60 FSR (Restroworks)</A></>,
+              "Operational efficiency from hybrid self/counter service",
+            ],
+          },
+          qsr: {
+            headline: "6–12% net margin",
+            points: [
+              <><A href="https://www.restroworks.com/blog/restaurant-profitability-statistics/">6–12% net margin — highest of the three (Restroworks)</A></>,
+              <><A href="https://www.restroworks.com/blog/restaurant-profitability-statistics/">20–25% food costs; volume offsets low check size (Restroworks)</A></>,
+              <><A href="https://rezku.com/blog/qsr-industry/">15–25 employees, lower skill requirement (Rezku)</A></>,
+              <><A href="https://rezku.com/blog/qsr-industry/">Drive-thru is the #1 margin driver at scale (Rezku)</A></>,
+            ],
+          },
+        },
+        {
+          label: "Operational Complexity",
+          icon: "⚙️",
+          fsr: {
+            headline: "Highest complexity",
+            points: [
+              "Table management, course firing, seat-level ordering",
+              "Check splitting, revenue centers, bar workflows",
+              "Labor mgt, reservations/waitlist, kitchen routing",
+              "Inventory management, modifiers, tipping workflows",
+              "Multi-course flow requires deep POS + KDS integration",
+            ],
+          },
+          fastcasual: {
+            headline: "Medium complexity",
+            points: [
+              "Counter/kiosk ordering with complex modifier trees",
+              "No table service but line management matters",
+              <><A href="https://www.hc-resource.com/posts/fast-casual-restaurants-are-leading-u.s.-growth-in-2025-and-here%27s-why">Digital ordering + delivery integrations are baseline (HC-Resource)</A></>,
+              "Loyalty programs require POS-level integration",
+              "Multi-channel (dine-in, mobile, delivery) adds complexity",
+            ],
+          },
+          qsr: {
+            headline: "Lower complexity, higher franchise demands",
+            points: [
+              "Speed + throughput is the primary workflow driver",
+              <><A href="https://rezku.com/blog/qsr-industry/">Drive-thru, kiosk, and mobile must work in concert (Rezku)</A></>,
+              <><A href="https://rezku.com/blog/qsr-industry/">Franchise ops require centralized config management (Rezku)</A></>,
+              "Standardized menus reduce modifier complexity",
+              <><A href="https://rezku.com/blog/qsr-industry/">KDS is critical for order accuracy at volume (Rezku)</A></>,
+            ],
+          },
+        },
+        {
+          label: "Technology Needs",
+          icon: "💻",
+          fsr: {
+            headline: "Deep POS + hospitality stack",
+            points: [
+              "Tableside ordering + handheld POS",
+              "Reservation integrations (OpenTable, Resy)",
+              "Course firing + kitchen routing via KDS",
+              "Guest-facing loyalty + CRM",
+              "Inventory, labor scheduling, reporting depth",
+            ],
+          },
+          fastcasual: {
+            headline: "Personalization + speed hybrid",
+            points: [
+              <><A href="https://www.hc-resource.com/posts/fast-casual-restaurants-are-leading-u.s.-growth-in-2025-and-here%27s-why">Kiosk + mobile ordering as primary channels (HC-Resource)</A></>,
+              <><A href="https://www.hc-resource.com/posts/fast-casual-restaurants-are-leading-u.s.-growth-in-2025-and-here%27s-why">Loyalty programs with behavior-based targeting (HC-Resource)</A></>,
+              "POS with complex modifier handling",
+              "Delivery integrations (DoorDash, UberEats, etc.)",
+              "Digital menu boards + order accuracy tools",
+            ],
+          },
+          qsr: {
+            headline: "Speed, scale, franchise ops",
+            points: [
+              "Lightning-fast POS optimized for drive-thru",
+              <><A href="https://rezku.com/blog/qsr-industry/">Self-service kiosks (now at 50%+ of QSRs) (Rezku)</A></>,
+              <><A href="https://rezku.com/blog/qsr-industry/">Enterprise-grade franchise management & reporting (Rezku)</A></>,
+              "AI/predictive inventory + labor tools",
+              <><A href="https://rezku.com/blog/qsr-industry/">Open APIs for delivery, loyalty, mobile app ecosystem (Rezku)</A></>,
+            ],
+          },
+        },
+        {
+          label: "Ownership & Go-to-Market",
+          icon: "🏪",
+          fsr: {
+            headline: "Fragmented independents — win one at a time",
+            points: [
+              <><A href="https://www.ibisworld.com/united-states/number-of-businesses/single-location-full-service-restaurants/1678/">Highly fragmented — thousands of independent operators (IBISWorld)</A></>,
+              "No head-to-head competition with large chains",
+              "Owners make their own technology decisions",
+              "Win one restaurant, build a reputation — referrals drive growth",
+              "ICP: independent operator, 1–5 locations, high complexity",
+            ],
+          },
+          fastcasual: {
+            headline: "Mix of independent operators and emerging chains",
+            points: [
+              <><A href="https://straitsresearch.com/report/fast-casual-restaurant-market">Blend of independent multi-unit and franchise groups (Straits Research)</A></>,
+              <><A href="https://straitsresearch.com/report/fast-casual-restaurant-market">Growing chains (Sweetgreen, CAVA, Wingstop) set standards (Straits Research)</A></>,
+              "Operators more tech-savvy; expect modern integrations",
+              "Multi-unit from earlier — 3+ locations typical sweet spot",
+              "ICP: 3–20 location emerging chain, loyalty-focused",
+            ],
+          },
+          qsr: {
+            headline: "Franchise-first; single location not worth it",
+            points: [
+              <><A href="https://www.mordorintelligence.com/industry-reports/united-states-quick-service-restaurants-market">Dominated by franchises (McDonald's, Chick-fil-A, Domino's) (Mordor Intelligence)</A></>,
+              "Single location economics rarely justify enterprise tech spend",
+              <><A href="https://rezku.com/blog/qsr-industry/">Tech decisions often set at franchisor level, not operator (Rezku)</A></>,
+              "Must serve multi-location from day one to be viable",
+              "ICP: franchisee with 5–50 locations, or regional chain",
+            ],
+          },
+        },
+      ],
+    };
+
+    const COLS = ["fsr", "fastcasual", "qsr"];
+    const COL_LABELS = { fsr: "FSR", fastcasual: "Fast Casual", qsr: "QSR" };
+    const COL_COLORS = {
+      fsr:        { bg: "#1a1a2e", accent: "#6c63ff", light: "#f0eeff" },
+      fastcasual: { bg: "#0d6e5a", accent: "#10b981", light: "#ecfdf5" },
+      qsr:        { bg: "#b45309", accent: "#f59e0b", light: "#fffbeb" },
+    };
+
+    function IcpComparison() {
+      const [expanded, setExpanded] = useState({});
+      const toggle = (rowIdx, col) => {
+        const key = `${rowIdx}-${col}`;
+        setExpanded(prev => ({ ...prev, [key]: !prev[key] }));
+      };
+
+      return (
+        <div style={{ fontFamily: "'Inter', system-ui, sans-serif", background: "#f9fafb", minHeight: "100vh", padding: "2rem 1rem" }}>
+          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+
+            <div style={{ marginBottom: "2rem", textAlign: "center" }}>
+              <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.15em", color: "#9ca3af", textTransform: "uppercase", marginBottom: 8 }}>
+                SpotOn · ICP Strategy
+              </div>
+              <h1 style={{ fontSize: "clamp(1.8rem, 4vw, 2.6rem)", fontWeight: 800, color: "#111827", margin: 0, lineHeight: 1.1 }}>
+                ICP Segment Comparison
+              </h1>
+              <p style={{ color: "#6b7280", marginTop: 8, fontSize: 15 }}>
+                FSR · Fast Casual · QSR — market data, economics, and tech implications
+              </p>
+            </div>
+
+            <div style={{ display: "grid", gridTemplateColumns: "180px 1fr 1fr 1fr", gap: 8, marginBottom: 8 }}>
+              <div />
+              {COLS.map(col => (
+                <div key={col} style={{
+                  background: COL_COLORS[col].bg, color: "#fff", borderRadius: 10,
+                  padding: "12px 16px", textAlign: "center", fontWeight: 700, fontSize: 17, letterSpacing: "0.02em",
+                }}>
+                  {COL_LABELS[col]}
+                </div>
+              ))}
+            </div>
+
+            {data.rows.map((row, rowIdx) => (
+              <div key={rowIdx} style={{ display: "grid", gridTemplateColumns: "180px 1fr 1fr 1fr", gap: 8, marginBottom: 8 }}>
+                <div style={{
+                  display: "flex", flexDirection: "column", justifyContent: "flex-start",
+                  padding: "14px 12px", background: "#fff", border: "1px solid #e5e7eb", borderRadius: 10,
+                }}>
+                  <div style={{ fontSize: 18, marginBottom: 4 }}>{row.icon}</div>
+                  <div style={{ fontWeight: 700, fontSize: 13, color: "#111827", lineHeight: 1.3 }}>{row.label}</div>
+                </div>
+
+                {COLS.map(col => {
+                  const cell = row[col];
+                  const key = `${rowIdx}-${col}`;
+                  const isOpen = !!expanded[key];
+                  const colors = COL_COLORS[col];
+                  return (
+                    <div key={col} style={{ background: "#fff", border: "1px solid #e5e7eb", borderRadius: 10, overflow: "hidden" }}>
+                      <button onClick={() => toggle(rowIdx, col)} style={{
+                        width: "100%", textAlign: "left", padding: "12px 14px",
+                        background: "none", border: "none", cursor: "pointer",
+                        display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8,
+                      }}>
+                        <div>
+                          <div style={{
+                            display: "inline-block", fontSize: 11, fontWeight: 700,
+                            color: colors.bg, background: colors.light,
+                            borderRadius: 4, padding: "2px 7px", marginBottom: 4, letterSpacing: "0.03em",
+                          }}>
+                            {COL_LABELS[col]}
+                          </div>
+                          <div style={{ fontSize: 13, fontWeight: 600, color: "#111827", lineHeight: 1.4 }}>
+                            {cell.headline}
+                          </div>
+                        </div>
+                        <span style={{ color: colors.accent, fontSize: 16, flexShrink: 0 }}>{isOpen ? "▲" : "▼"}</span>
+                      </button>
+
+                      {isOpen && (
+                        <div style={{ padding: "0 14px 12px", borderTop: `2px solid ${colors.light}` }}>
+                          <ul style={{ margin: "8px 0 0 0", padding: "0 0 0 16px", listStyle: "disc" }}>
+                            {cell.points.map((pt, i) => (
+                              <li key={i} style={{ fontSize: 12.5, color: "#374151", marginBottom: 5, lineHeight: 1.6 }}>
+                                {pt}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+
+            <div style={{ textAlign: "center", marginTop: 16, fontSize: 11, color: "#d1d5db" }}>
+              Sources: IBISWorld · Expert Market Research · Mordor Intelligence · Straits Research · Statista · Whipplewood · Restroworks · TouchBistro · Rezku · HC-Resource · VantaInsights · National Restaurant Authority · Business Research Insights
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<IcpComparison />);
+  </script>
+</body>
+</html>
