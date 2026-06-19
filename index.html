@@ -178,67 +178,6 @@
           },
         },
         {
-          label: "Features & Technology",
-          icon: "⚙️",
-          type: "comparison",
-          mostlyFsr: [
-            "Tableside + handheld ordering",
-            "Coursing & course firing",
-            "Seat management",
-            "Split checks",
-            "Server workflows",
-            "Reservations (OpenTable, Resy)",
-            "Waitlist",
-            "Guest profiles + CRM",
-            "QR order & pay",
-            "Inventory management",
-          ],
-          both: [
-            "Fast payments",
-            "Complex modifiers",
-            "Discounts & taxes",
-            "Digital ordering",
-            "Labor management & scheduling",
-            "KDS",
-            "Reporting",
-          ],
-          mostlyQsr: [
-            "Counter ordering",
-            "Drive-thru POS",
-            "Self-service kiosks",
-            "Multi-location management",
-            "Loyalty programs",
-            "Payment flow speed",
-            "Catering / delivery",
-            "Franchise management & reporting",
-          ],
-          note: "QSR and FSR share ~60–70% of the foundation, but the remaining 30–40% drives a disproportionate amount of complexity, product decisions, and roadmap tradeoffs.",
-        },
-        {
-          label: "Ownership & Go-to-Market",
-          icon: "🏪",
-          fsr: {
-            headline: "Fragmented independents — win one at a time",
-            points: [
-              <><A href="https://www.ibisworld.com/united-states/number-of-businesses/single-location-full-service-restaurants/1678/">Highly fragmented — thousands of independent operators (IBISWorld)</A></>,
-              "Primary competition is other independent POS vendors (Toast, Square), not enterprise systems",
-              "Owners make their own technology decisions with no corporate mandate",
-              "Win one restaurant, build a reputation — referrals drive growth",
-              "ICP: independent operator, 1–5 locations, high complexity",
-            ],
-          },
-          qsr: {
-            headline: "Franchise-first; independent operators are a small slice",
-            points: [
-              <><A href="https://www.mordorintelligence.com/industry-reports/united-states-quick-service-restaurants-market">Dominated by franchises (McDonald's, Chick-fil-A, Domino's) (Mordor Intelligence)</A></>,
-              "Single location economics rarely justify enterprise tech spend",
-              <><A href="https://www.myr.io/blog/future-of-qsr-2026-trends-priorities-for-franchise-leaders">Tech decisions are typically franchisor-mandated, though some progressive brands allow franchisee input on POS selection (MYR POS)</A></>,
-              "Must serve multi-location from day one to be viable",
-              "ICP: franchisee with 5–50 locations, or regional chain",
-            ],
-          },
-        },
-        {
           label: "Optimization Goals",
           icon: "🎯",
           fsr: {
@@ -269,31 +208,130 @@
           },
         },
         {
-          label: "Roadmap Priorities",
+          label: "Features & Technology",
+          icon: "⚙️",
+          type: "comparison",
+          mostlyFsr: [
+            "Table management",
+            "Tableside + handheld ordering",
+            "Coursing & course firing",
+            "Seat management",
+            "Split checks",
+            "Server workflows",
+            "Reservations (OpenTable, Resy)",
+            "Waitlist",
+            "Guest profiles + CRM",
+            "QR order & pay",
+            "Inventory management",
+          ],
+          both: [
+            "Fast payments",
+            "Complex modifiers",
+            "Discounts & taxes",
+            "Digital ordering",
+            "Labor management & scheduling",
+            "KDS",
+            "Reporting",
+          ],
+          mostlyQsr: [
+            "Fast POS flows",
+            "Counter ordering",
+            "Drive-thru POS",
+            "Self-service kiosks",
+            "Mobile ordering",
+            "Pickup workflows",
+            "Multi-location management",
+            "Loyalty programs",
+            "Payment flow speed",
+            "Catering / delivery",
+            "Franchise management & reporting",
+          ],
+          note: "QSR and FSR share ~60–70% of the foundation, but the remaining 30–40% drives a disproportionate amount of complexity, product decisions, and roadmap tradeoffs.",
+        },
+        {
+          label: "Roadmap to Win",
           icon: "🗺️",
+          type: "roadmap",
+          note: "Winning a segment requires depth in that segment's core capabilities — not just parity. The two roadmaps diverge significantly after the shared foundation.",
+          capabilities: [
+            {
+              label: "Online Ordering",
+              qsr: { level: "very-high", data: "42% of QSR sales are digital (app/web/kiosk) in 2025, up from 38% in 2024", url: "https://rezku.com/blog/qsr-industry/" },
+              fsr: { level: "high",      data: "63% of FSR customers willing to order via smartphone app; 27% of FSRs investing in app development", url: "https://urmmagazine.com/growth/consumer-trends-in-the-fsr-qsr-industry-a-2024-2025-perspective/" },
+            },
+            {
+              label: "Delivery",
+              qsr: { level: "very-high", data: "Drive-thru + delivery = ~70% of QSR revenue combined", url: "https://rezku.com/blog/qsr-industry/" },
+              fsr: { level: "medium",    data: "80% of all restaurants now offer delivery via third-party apps, but it's a smaller share of FSR revenue", url: "https://www.restolabs.com/blog/online-ordering-statistics-every-restaurateur-should-know" },
+            },
+            {
+              label: "Loyalty Programs",
+              qsr: { level: "high",      data: "~71% of QSRs offer loyalty; top QSR brands report 50%+ of visits from loyalty members", url: "https://nationalrestaurant.com/" },
+              fsr: { level: "high",      data: "~60–70% of FSRs offer loyalty; NRA reports 67% industry-wide adoption", url: "https://nationalrestaurant.com/" },
+            },
+            {
+              label: "Catering",
+              qsr: { level: "very-high", data: "~60–80% of QSRs offer catering; Chipotle, Panera, Chick-fil-A, Jersey Mike's all run dedicated catering businesses", url: "https://rezku.com/blog/qsr-industry/" },
+              fsr: { level: "medium-low",data: "~20–40% of FSRs run a true catering operation; many support large-party orders but lack dedicated catering workflows", url: "" },
+            },
+            {
+              label: "Self-Service Kiosks",
+              qsr: { level: "very-high", data: "43% surge in kiosk adoption 2022–2024; nearly 50% of QSR customers order from kiosks weekly; McDonald's alone has 130K+ kiosks", url: "https://grubbrr.com/qsr-self-service-kiosks-2026-guide/" },
+              fsr: { level: "very-low",  data: "Minimal FSR adoption — counter to the high-touch hospitality model", url: "" },
+            },
+            {
+              label: "Drive-Thru",
+              qsr: { level: "very-high", data: "65% of QSR orders come through drive-thru (down from 83% in 2020 as digital grows); drive-thru is the #1 margin driver at scale", url: "https://www.qsrmagazine.com/story/the-2025-qsr-drive-thru-report/" },
+              fsr: { level: "none",      data: "Not applicable to FSR", url: "" },
+            },
+            {
+              label: "KDS",
+              qsr: { level: "high",      data: "75% of new QSR locations install KDS within first year; critical for drive-thru and high-volume counter ops", url: "https://delivety.com/blog/kitchen-display-system-guide-what-is-a-kds" },
+              fsr: { level: "high",      data: "~60% of all new restaurants install KDS within first year; expanding beyond QSR into casual and fine dining", url: "https://delivety.com/blog/kitchen-display-system-guide-what-is-a-kds" },
+            },
+            {
+              label: "Reservations",
+              qsr: { level: "none",      data: "Not applicable to QSR", url: "" },
+              fsr: { level: "very-high", data: "85%+ of FSRs in developed markets use digital reservation systems; OpenTable has 47% market share; DoorDash acquired SevenRooms for $1.2B in 2025", url: "https://www.cnbc.com/2026/02/25/doordash-resy-opentable-restaurant-reservation-wars.html" },
+            },
+            {
+              label: "Waitlist",
+              qsr: { level: "low",       data: "Some QSRs manage peak-hour queues but rarely need dedicated waitlist software", url: "" },
+              fsr: { level: "very-high", data: "FSRs represent 41% of waitlist management market revenue; AI-driven table optimization seeing strong FSR adoption", url: "https://dataintelo.com/report/waitlist-management-for-restaurants-market" },
+            },
+            {
+              label: "Table Management",
+              qsr: { level: "none",      data: "Not applicable to QSR", url: "" },
+              fsr: { level: "very-high", data: "Table & delivery management segment growing at 19.6% CAGR 2025–2030; core to server workflows, revenue per table, and turn optimization", url: "https://www.grandviewresearch.com/industry-analysis/restaurant-management-software-market" },
+            },
+            {
+              label: "Course Pacing",
+              qsr: { level: "none",      data: "Not applicable to QSR", url: "" },
+              fsr: { level: "very-high", data: "Core to FSR service model — controlling kitchen timing, seat pacing, and server coordination at every table", url: "" },
+            },
+          ],
+        },
+        {
+          label: "Ownership & Go-to-Market",
+          icon: "🏪",
           fsr: {
-            headline: "Table management, reservations, service workflows",
+            headline: "Fragmented independents — win one at a time",
             points: [
-              "Table management",
-              "Reservations",
-              "Waitlist",
-              "Courses & pacing",
-              "Server workflows",
-              "Split payments",
-              "Guest profiles",
+              <><A href="https://www.ibisworld.com/united-states/number-of-businesses/single-location-full-service-restaurants/1678/">Highly fragmented — thousands of independent operators (IBISWorld)</A></>,
+              "Primary competition is other independent POS vendors (Toast, Square), not enterprise systems",
+              "Owners make their own technology decisions with no corporate mandate",
+              "Win one restaurant, build a reputation — referrals drive growth",
+              "ICP: independent operator, 1–5 locations, high complexity",
             ],
           },
           qsr: {
-            headline: "Speed, scale, self-service",
+            headline: "Franchise-first; independent operators are a small slice",
             points: [
-              "Fast POS flows",
-              "KDS",
-              "Mobile ordering",
-              "Kiosks",
-              "Drive-thru",
-              "Pickup workflows",
-              "Delivery integrations",
-              "Labor optimization",
+              <><A href="https://www.mordorintelligence.com/industry-reports/united-states-quick-service-restaurants-market">Dominated by franchises (McDonald's, Chick-fil-A, Domino's) (Mordor Intelligence)</A></>,
+              "Single location economics rarely justify enterprise tech spend",
+              <><A href="https://www.myr.io/blog/future-of-qsr-2026-trends-priorities-for-franchise-leaders">Tech decisions are typically franchisor-mandated, though some progressive brands allow franchisee input on POS selection (MYR POS)</A></>,
+              "Must serve multi-location from day one to be viable",
+              "ICP: franchisee with 5–50 locations, or regional chain",
             ],
           },
         },
@@ -305,6 +343,56 @@
     const COL_COLORS = {
       fsr: { bg: "#1a1a2e", accent: "#6c63ff", light: "#f0eeff" },
       qsr: { bg: "#b45309", accent: "#f59e0b", light: "#fffbeb" },
+    };
+
+    const LEVEL_CONFIG = {
+      "very-high":  { label: "Very High",  color: "#166534", bg: "#dcfce7", bar: 5 },
+      "high":       { label: "High",       color: "#1e40af", bg: "#dbeafe", bar: 4 },
+      "medium":     { label: "Medium",     color: "#92400e", bg: "#fef3c7", bar: 3 },
+      "medium-low": { label: "Med–Low",    color: "#9a3412", bg: "#ffedd5", bar: 2 },
+      "low":        { label: "Low",        color: "#6b7280", bg: "#f3f4f6", bar: 1 },
+      "very-low":   { label: "Very Low",   color: "#9ca3af", bg: "#f9fafb", bar: 1 },
+      "none":       { label: "—",          color: "#d1d5db", bg: "#f9fafb", bar: 0 },
+    };
+
+    const LevelDots = ({ level }) => {
+      const cfg = LEVEL_CONFIG[level] || LEVEL_CONFIG["none"];
+      const total = 5;
+      return (
+        <div style={{ display: "flex", gap: 3, alignItems: "center" }}>
+          {Array.from({ length: total }).map((_, i) => (
+            <div key={i} style={{
+              width: 8, height: 8, borderRadius: "50%",
+              background: i < cfg.bar ? cfg.color : "#e5e7eb",
+            }} />
+          ))}
+        </div>
+      );
+    };
+
+    const DataCell = ({ entry, segColor }) => {
+      const cfg = LEVEL_CONFIG[entry.level] || LEVEL_CONFIG["none"];
+      const isNone = entry.level === "none";
+      return (
+        <div style={{ padding: "10px 12px", borderLeft: `3px solid ${isNone ? "#e5e7eb" : segColor}` }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: isNone ? 0 : 6 }}>
+            <span style={{
+              fontSize: 11, fontWeight: 700, letterSpacing: "0.03em",
+              color: cfg.color, background: cfg.bg,
+              borderRadius: 4, padding: "2px 7px", whiteSpace: "nowrap",
+            }}>{cfg.label}</span>
+            {!isNone && <LevelDots level={entry.level} />}
+          </div>
+          {entry.data && !isNone && (
+            <p style={{ margin: 0, fontSize: 11.5, color: "#6b7280", lineHeight: 1.5 }}>
+              {entry.url
+                ? <a href={entry.url} target="_blank" rel="noopener noreferrer"
+                    style={{ color: "inherit", textDecoration: "underline" }}>{entry.data}</a>
+                : entry.data}
+            </p>
+          )}
+        </div>
+      );
     };
 
     function IcpComparison() {
@@ -352,7 +440,53 @@
                   <div style={{ fontWeight: 700, fontSize: 13, color: "#111827", lineHeight: 1.3 }}>{row.label}</div>
                 </div>
 
-                {row.type === "comparison" ? (
+                {row.type === "roadmap" ? (
+                  <div style={{ gridColumn: "2 / 4", background: "#fff", border: "1px solid #e5e7eb", borderRadius: 10, overflow: "hidden" }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "160px 1fr 1fr" }}>
+                      <div style={{ padding: "10px 12px", borderBottom: "1px solid #e5e7eb", background: "#f9fafb" }} />
+                      {["fsr","qsr"].map(seg => (
+                        <div key={seg} style={{
+                          padding: "10px 12px", borderBottom: "1px solid #e5e7eb", borderLeft: "1px solid #e5e7eb",
+                          background: COL_COLORS[seg].bg, color: COL_COLORS[seg].bg === "#1a1a2e" ? "#fff" : "#fff",
+                          fontWeight: 700, fontSize: 13, letterSpacing: "0.04em",
+                          display: "flex", alignItems: "center", gap: 6,
+                        }}>
+                          <span style={{
+                            display: "inline-block", width: 10, height: 10, borderRadius: "50%",
+                            background: COL_COLORS[seg].accent, flexShrink: 0,
+                          }}/>
+                          {COL_LABELS[seg]}
+                        </div>
+                      ))}
+                      {row.capabilities.map((cap, ci) => (
+                        <React.Fragment key={ci}>
+                          <div style={{
+                            padding: "10px 12px",
+                            borderBottom: ci < row.capabilities.length - 1 ? "1px solid #f3f4f6" : "none",
+                            display: "flex", alignItems: "center",
+                          }}>
+                            <span style={{ fontSize: 12.5, fontWeight: 600, color: "#374151" }}>{cap.label}</span>
+                          </div>
+                          {["fsr","qsr"].map(seg => (
+                            <div key={seg} style={{
+                              borderLeft: "1px solid #e5e7eb",
+                              borderBottom: ci < row.capabilities.length - 1 ? "1px solid #f3f4f6" : "none",
+                            }}>
+                              <DataCell entry={cap[seg]} segColor={COL_COLORS[seg].accent} />
+                            </div>
+                          ))}
+                        </React.Fragment>
+                      ))}
+                    </div>
+                    {row.note && (
+                      <div style={{ borderTop: "1px solid #e5e7eb", padding: "10px 14px", background: "#f9fafb" }}>
+                        <p style={{ margin: 0, fontSize: 12.5, color: "#6b7280", fontStyle: "italic", lineHeight: 1.6 }}>
+                          {row.note}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                ) : row.type === "comparison" ? (
                   <div style={{ gridColumn: "2 / 4", background: "#fff", border: "1px solid #e5e7eb", borderRadius: 10, overflow: "hidden" }}>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
                       {[
