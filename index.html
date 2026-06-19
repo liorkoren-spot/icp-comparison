@@ -430,18 +430,29 @@
               ))}
             </div>
 
-            {data.rows.map((row, rowIdx) => (
+            {data.rows.map((row, rowIdx) => {
+              const isWide = row.type === "comparison" || row.type === "roadmap";
+              const wideKey = `wide-${rowIdx}`;
+              const wideOpen = expanded[wideKey] !== false;
+              return (
               <div key={rowIdx} style={{ display: "grid", gridTemplateColumns: "200px 1fr 1fr", gap: 8, marginBottom: 8 }}>
                 <div style={{
                   display: "flex", flexDirection: "column", justifyContent: "flex-start",
                   padding: "14px 12px", background: "#fff", border: "1px solid #e5e7eb", borderRadius: 10,
-                }}>
+                  cursor: isWide ? "pointer" : "default",
+                }} onClick={isWide ? () => setExpanded(prev => ({ ...prev, [wideKey]: !wideOpen })) : undefined}>
                   <div style={{ fontSize: 18, marginBottom: 4 }}>{row.icon}</div>
                   <div style={{ fontWeight: 700, fontSize: 13, color: "#111827", lineHeight: 1.3 }}>{row.label}</div>
+                  {isWide && (
+                    <div style={{ marginTop: "auto", paddingTop: 8, color: "#9ca3af", fontSize: 13 }}>
+                      {wideOpen ? "▲" : "▼"}
+                    </div>
+                  )}
                 </div>
 
                 {row.type === "roadmap" ? (
                   <div style={{ gridColumn: "2 / 4", background: "#fff", border: "1px solid #e5e7eb", borderRadius: 10, overflow: "hidden" }}>
+                  {wideOpen && <div>
                     <div style={{ display: "grid", gridTemplateColumns: "160px 1fr 1fr" }}>
                       <div style={{ padding: "10px 12px", borderBottom: "1px solid #e5e7eb", background: "#f9fafb" }} />
                       {["fsr","qsr"].map(seg => (
@@ -485,9 +496,11 @@
                         </p>
                       </div>
                     )}
+                  </div>}
                   </div>
                 ) : row.type === "comparison" ? (
                   <div style={{ gridColumn: "2 / 4", background: "#fff", border: "1px solid #e5e7eb", borderRadius: 10, overflow: "hidden" }}>
+                    {wideOpen && <div>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr" }}>
                       {[
                         { key: "mostlyFsr", label: "Mostly FSR", colors: COL_COLORS.fsr },
@@ -522,6 +535,7 @@
                         </p>
                       </div>
                     )}
+                    </div>}
                   </div>
                 ) : (
                   COLS.map(col => {
@@ -567,7 +581,7 @@
                   })
                 )}
               </div>
-            ))}
+            ); })}
 
             <div style={{ textAlign: "center", marginTop: 16, fontSize: 11, color: "#d1d5db" }}>
               Sources: IBISWorld · Mordor Intelligence · Statista · Whipplewood · Restroworks · TouchBistro · Rezku · MYR POS · VantaInsights · National Restaurant Authority · Business Research Insights
